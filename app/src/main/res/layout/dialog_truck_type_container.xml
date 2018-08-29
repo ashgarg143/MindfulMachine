@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Select truck"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:background="#f2f2f2"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Container"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select truck length"
+            android:padding="8dp"
+            android:textColor="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="6dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:id="@+id/tv_dialog_truck_type_container_one"
+                android:text="@string/truck_type_container_1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/tv_dialog_truck_type_container_two"
+                android:layout_marginLeft="20dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:text="@string/truck_type_container_2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="6dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:id="@+id/tv_dialog_truck_type_container_three"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:text="@string/truck_type_container_3"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tv_dialog_truck_type_container_four"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:text="@string/truck_type_container_4"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="6dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:id="@+id/tv_dialog_truck_type_container_five"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:text="@string/truck_type_container_5"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tv_dialog_truck_type_container_six"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:text="@string/truck_type_container_6"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:id="@+id/tv_dialog_truck_type_container_seven"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:text="@string/truck_type_container_7"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tv_dialog_truck_type_container_eight"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_edit_text_with_border"
+                android:gravity="center"
+                android:text="@string/truck_type_container_8"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

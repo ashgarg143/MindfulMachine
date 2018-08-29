@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Mindful Machine</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_orders">My Orders</string>
+    <string name="account">My Account</string>
+    <string name="title_place_order">Place order</string>
+    <string name="title_home">Home</string>
+    <string name="truck_type_open_1">6 TYRE(9-12 FT)</string>
+    <string name="truck_type_open_2">10 TYRE</string>
+    <string name="truck_type_open_3">12 TYRE</string>
+    <string name="truck_type_open_4">14 TYRE</string>
+    <string name="truck_type_open_5">18 TYRE</string>
+    <string name="truck_type_open_6">22 TYRE</string>
+    <string name="truck_type_open_7">TEMPO 407</string>
+    <string name="truck_type_open_8">LCV(14-17 FT)</string>
+    <string name="truck_type_container_1">32 FT MXL</string>
+    <string name="truck_type_container_2">32 FT SXL</string>
+    <string name="truck_type_container_3">19-22 FT SXL</string>
+    <string name="truck_type_container_4">LCV(14-17 FT)</string>
+    <string name="truck_type_container_5">24 FT MXL</string>
+    <string name="truck_type_container_6">24 FT SXL</string>
+    <string name="truck_type_container_7">32 FT MXL</string>
+    <string name="truck_type_container_8">32 FT SXL HQ</string>
+    <string name="truck_type_trailer_1">High Bed</string>
+    <string name="truck_type_trailer_2">Semi Bed</string>
+    <string name="truck_type_trailer_3">Low Bed</string>
+    <string name="material_type_1">Packaged/Consumer boxes</string>
+    <string name="material_type_2">Food and agriculture</string>
+    <string name="material_type_3">Machine/Auto parts</string>
+    <string name="material_type_4">Electronic goods</string>
+    <string name="material_type_5">Chemical/Powder</string>
+    <string name="material_type_6">Scrap</string>
+    <string name="material_type_7">Construction material</string>
+    <string name="material_type_8">Petroleum/Paint</string>
+    <string name="material_type_9">Tyre</string>
+    <string name="material_type_10">Battery</string>
+    <string name="material_type_11">Cylinders</string>
+    <string name="material_type_12">Alcoholic beverages</string>
+
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "715265385475",
+    "firebase_url": "https://mindfulmachine-ebc41.firebaseio.com",
+    "project_id": "mindfulmachine-ebc41",
+    "storage_bucket": "mindfulmachine-ebc41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715265385475:android:3775bf85a6484360",
+        "android_client_info": {
+          "package_name": "com.example.shivamvk.mindfulmachine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715265385475-ievfmip5083sfmpgpinnto6nlkhsmebo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shivamvk.mindfulmachine",
+            "certificate_hash": "fe3c1c5fee88910f08cd49e7f8190f5573bbb0da"
+          }
+        },
+        {
+          "client_id": "715265385475-llqld6ii3l18k4lud3kst3s88aa7e52d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEIVbXRO4cfyQaJv69eObBGMBrEBS8iSE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715265385475-llqld6ii3l18k4lud3kst3s88aa7e52d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

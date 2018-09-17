@@ -12,13 +12,13 @@ public class OnBoardingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_boarding);
-        findViewById(R.id.bt_on_boarding_sign_in).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.bt_on_boarding_sign_in).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(OnBoardingActivity.this, SignInActivity.class));
                 overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
             }
-        });
+        });*/
 
         new Handler().postDelayed(new Runnable() {
             @Override

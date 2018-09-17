@@ -62,7 +62,7 @@ public class PlaceOrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Mindful Machine");
+        getActivity().setTitle("Logistics");
 
         tvNotificationText = view.findViewById(R.id.tv_notification_text);
         ivCloseNotification = view.findViewById(R.id.iv_close_notification);

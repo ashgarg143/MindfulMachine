@@ -16,12 +16,9 @@
             android:name="sendotp.key"
             android:value="233650AmGm8ef0C45b811710" />
 
-
         <activity
             android:name=".OnBoardingActivity"
-            android:theme="@style/NoActionBar">
-
-        </activity>
+            android:theme="@style/NoActionBar"></activity>
         <activity
             android:name=".SignInActivity"
             android:theme="@style/NoActionBar" />
@@ -36,6 +33,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MyActivity" />
+        <activity android:name=".UploadActivity"
+            android:parentActivityName=".HomeActivity">
         </activity>
     </application>
 

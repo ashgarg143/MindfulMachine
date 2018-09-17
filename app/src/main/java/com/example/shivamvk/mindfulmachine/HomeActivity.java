@@ -26,11 +26,12 @@ public class HomeActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_place_order:
                     getSupportActionBar().show();
-                    fragment = new PlaceOrderFragment();
+                    fragment = new CreateOrderFragment();
                     break;
                 case R.id.navigation_orders:
                     getSupportActionBar().hide();
-                    fragment = new MyOrdersFragment();
+                   // fragment = new MyOrdersFragment();
+                    startActivity(new Intent(HomeActivity.this,MyActivity.class));
                     break;
                 case R.id.navigation_account:
                     getSupportActionBar().hide();
@@ -62,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
         flHomeActivity = findViewById(R.id.fl_home_activity);
 
-        Fragment fragment = new PlaceOrderFragment();
+        Fragment fragment = new CreateOrderFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fl_home_activity, fragment);

@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,36 +34,31 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
-
-import static android.app.Activity.RESULT_OK;
 
 public class AccountFragment extends Fragment {
 
-    private TextView tvAccountUserName, tvAccountUserEmail, tvAccountUserNumber, tvAccountEmailNotVerified,
-            tvAccountNumberNotVerified, tvAccountEmailVerified,tvAccountCompanyName,tvAccountAddress,
-            tvAccountUploadAadhar;
-    private ImageView ivAccountEditNumber, ivAccountEmailNotVerified, ivAccountNumberNotVerfied,
-            ivAccountEmailVerified, ivAccountNumberVerified;
-    private CardView cvLogout,cvUploadAadhar;
+    private TextView tvAccountUserName, tvAccountEmailVerified, tvAccountEmailNotVerified,
+           tvAccountAlternateNumberVerified,tvAccountAlternateNumberNotVerified;
+    private ImageView ivAccountEditNumber, ivAccountEmailNotVerified,
+            ivAccountEmailVerified,ivAccountAlternateNumberVerified,ivAccountAlternateNumberNotVerified
+            ,ivUploadPanCard;
+    private CardView cvLogout;
+    private EditText etAccountUserName,etAccountUserEmail,etAccountUserNumber,etAccountUserAlternateNumber;
+    private RelativeLayout rlUploadPANCard;
 
-    private static final int PHOTO_PICKER_AADHAR = 123;
+    private static final int PHOTO_PICKER_ADHAAR = 123;
+    private static final int PHOTO_PICKER_PAN_CARD = 456;
+    private static final int PHOTO_PICKER_VISITING_CARD = 789;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_account, null, false);
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 
     @Override
@@ -71,35 +66,87 @@ public class AccountFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         tvAccountUserName = view.findViewById(R.id.tv_account_user_name);
-        tvAccountUserEmail = view.findViewById(R.id.tv_account_user_email);
-        tvAccountUserNumber = view.findViewById(R.id.tv_account_user_number);
+
+        etAccountUserName = view.findViewById(R.id.et_account_user_name);
+
+        etAccountUserEmail = view.findViewById(R.id.et_account_user_email);
         tvAccountEmailVerified = view.findViewById(R.id.tv_account_email_verified);
         tvAccountEmailNotVerified = view.findViewById(R.id.tv_account_email_not_verified);
-        tvAccountNumberNotVerified = view.findViewById(R.id.tv_account_number_not_verified);
+        ivAccountEmailNotVerified = view.findViewById(R.id.iv_account_email_not_verified);
+        ivAccountEmailVerified = view.findViewById(R.id.iv_account_email_verified);
 
-        tvAccountCompanyName = view.findViewById(R.id.tv_account_company_name);
-        tvAccountAddress = view.findViewById(R.id.tv_account_address);
+        etAccountUserNumber = view.findViewById(R.id.et_account_user_number);
 
-        tvAccountUploadAadhar = view.findViewById(R.id.tv_account_upload_aadhar);
+
+        etAccountUserAlternateNumber = view.findViewById(R.id.et_account_alternate_user_number);
+        tvAccountAlternateNumberVerified = view.findViewById(R.id.tv_account_alternate_number_verified);
+        tvAccountAlternateNumberNotVerified = view.findViewById(R.id.tv_account_alternate_number_not_verified);
+        ivAccountAlternateNumberVerified = view.findViewById(R.id.iv_account_alternate_number_verified);
+        ivAccountAlternateNumberNotVerified = view.findViewById(R.id.iv_account_alternate_number_not_verified);
+
+        rlUploadPANCard = view.findViewById(R.id.rl_upload_pan_card_activity_account);
+        rlUploadPANCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),UploadActivity.class));
+            }
+        });
+        ivUploadPanCard = view.findViewById(R.id.iv_dummy_image_pan_card);
+
+/*
+        ivUploadPanCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tvAccountUploadAadhar.getText().toString().equals("Upload Aadhar")) {
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/jpeg");
+                    intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                    startActivityForResult(Intent.createChooser(intent, "Complete action using"), PHOTO_PICKER_AADHAR);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Your Aadhar Card");
+                    View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_view_aadhar, null, false);
+                    builder.setView(view1);
+                    ImageView ivAadhar = view1.findViewById(R.id.iv_dialog_view_aadhar);
+                    Picasso.get()
+                            .load(SharedPrefManager.getInstance(getContext()).isKycDone())
+                            .placeholder(R.drawable.aadharplaceholder)
+                            .into(ivAadhar);
+                    builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //do nothing
+                        }
+                    });
+                    builder.show();
+                }
+            }
+        });
+*/
+
+
+
+
+
+
+
+       /* tvAccountUploadAadhar = view.findViewById(R.id.tv_account_upload_aadhar);
 
         cvUploadAadhar = view.findViewById(R.id.cv_account_upload_aadhar);
         if(!SharedPrefManager.getInstance(getContext()).isKycDone().equals("No")){
             tvAccountUploadAadhar.setText("Aadhar uploaded");
-        }
+        }*/
 
         cvLogout = view.findViewById(R.id.cv_logout);
 
-        ivAccountEmailNotVerified = view.findViewById(R.id.iv_account_email_not_verified);
-        ivAccountEmailVerified = view.findViewById(R.id.iv_account_email_verified);
+
 
         ivAccountEditNumber = view.findViewById(R.id.iv_account_edit_user_number);
 
         tvAccountUserName.setText(SharedPrefManager.getInstance(getContext()).getName());
-        tvAccountUserEmail.setText(SharedPrefManager.getInstance(getContext()).getEmail());
-        tvAccountUserNumber.setText("+91" + SharedPrefManager.getInstance(getContext()).getNumber());
+        etAccountUserEmail.setText(SharedPrefManager.getInstance(getContext()).getEmail());
+        etAccountUserNumber.setText("+91" + SharedPrefManager.getInstance(getContext()).getNumber());
 
-        tvAccountCompanyName.setText(SharedPrefManager.getInstance(getContext()).getCompanyName());
-        tvAccountAddress.setText(SharedPrefManager.getInstance(getContext()).getAddress());
 
         if (SharedPrefManager.getInstance(getContext()).isEmailVerified().equals("Yes")){
             tvAccountEmailNotVerified.setVisibility(View.GONE);
@@ -245,9 +292,9 @@ public class AccountFragment extends Fragment {
                 etDialogEditName.setText(SharedPrefManager.getInstance(getActivity()).getName());
                 etDialogEditEmail.setText(SharedPrefManager.getInstance(getContext()).getEmail());
 
-                if(!SharedPrefManager.getInstance(getContext()).getCompanyName().equals("Not provided")){
+                /*if(!SharedPrefManager.getInstance(getContext()).getCompanyName().equals("Not provided")){
                     etDialogCompanyName.setText(SharedPrefManager.getInstance(getContext()).getCompanyName());
-                }
+                }*/
 
                 if(!SharedPrefManager.getInstance(getContext()).getAddress().equals("Not provided")){
                     etDialogAddress.setText(SharedPrefManager.getInstance(getContext()).getAddress());
@@ -256,7 +303,7 @@ public class AccountFragment extends Fragment {
                 btDialogEditSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (verifyInputs(etDialogEditEmail.getText().toString(),etDialogCompanyName.getText().toString(),etDialogAddress.getText().toString())){
+                        if (verifyInputs(etDialogEditEmail.getText().toString(),"Not Provided",etDialogAddress.getText().toString())){
                             if (isNetworkAvailable()){
                                 final ProgressDialog progressDialog = new ProgressDialog(getActivity());
                                 progressDialog.setMessage("Saving changes...");
@@ -271,7 +318,7 @@ public class AccountFragment extends Fragment {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         dataSnapshot.child("email").getRef().setValue(etDialogEditEmail.getText().toString());
                                         dataSnapshot.child("name").getRef().setValue(etDialogEditName.getText().toString());
-                                        dataSnapshot.child("companyname").getRef().setValue(etDialogCompanyName.getText().toString());
+                                        dataSnapshot.child("companyname").getRef().setValue("Not provided");
                                         dataSnapshot.child("address").getRef().setValue(etDialogAddress.getText().toString());
 
                                         if (!SharedPrefManager.getInstance(getContext()).getEmail().equals(etDialogEditEmail.getText().toString())){
@@ -282,7 +329,7 @@ public class AccountFragment extends Fragment {
                                                             SharedPrefManager.getInstance(getContext()).getNumber(),
                                                             "No",
                                                             "Yes",
-                                                            etDialogCompanyName.getText().toString(),
+                                                            "Not provided",
                                                             etDialogAddress.getText().toString(),
                                                             SharedPrefManager.getInstance(getContext()).isKycDone()
                                                     );
@@ -293,7 +340,7 @@ public class AccountFragment extends Fragment {
                                                             SharedPrefManager.getInstance(getContext()).getNumber(),
                                                             "Yes",
                                                             "Yes",
-                                                            etDialogCompanyName.getText().toString(),
+                                                            "Not provided",
                                                             etDialogAddress.getText().toString(),
                                                             SharedPrefManager.getInstance(getContext()).isKycDone()
                                                     );
@@ -379,6 +426,7 @@ public class AccountFragment extends Fragment {
             }
         });
 
+/*
         cvUploadAadhar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -407,18 +455,21 @@ public class AccountFragment extends Fragment {
                 }
             }
         });
+*/
 
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == PHOTO_PICKER_AADHAR){
+/*
+        if(requestCode == PHOTO_PICKER_ADHAAR){
             if (resultCode == RESULT_OK){
                 final Uri selectImageUri = data.getData();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_upload_aadhar,null ,false);
                 builder.setView(view);
-                builder.setTitle("Upload Aadhar");
+                builder.setTitle("Upload Adhaar");
 
                 ImageView ivUploadAadhar = view.findViewById(R.id.iv_dialog_upload_aadhar);
                 Button btUploadAadhar = view.findViewById(R.id.bt_dialog_upload_aadhar);
@@ -480,5 +531,8 @@ public class AccountFragment extends Fragment {
 
             }
         }
+*/
+
     }
+
 }

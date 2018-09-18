@@ -2,6 +2,7 @@ package com.example.shivamvk.mindfulmachine;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,13 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -46,11 +50,20 @@ public class PlaceOrderFragment extends Fragment {
     private TextView tvNotificationText;
     private ImageView ivCloseNotification;
     private RelativeLayout rlNoificationHeader;
-    private EditText etLoadingPoint,etTripDestination,etTruckType,etMaterialType,etLoadingTime,etRemarks;
+    private EditText etLoadingPoint,etTripDestination,etTruckType,etMaterialType, etLoadingDate,etLoadgTime,etRemarks;
     private Button btPlaceOrder;
+
+    private Spinner spPaymentType,spNoOfTrucks;
+
+    private static final String[] spNoOfTrucksList={"No of trucks","No of trucks: 1","No of trucks: 2","No of trucks: 3","No of trucks: 4","No of trucks: 5"};
+    private static final String[] spPaymentTypeList = {"Payment Type","Advance To Pay Driver - Cash","Advance To Pay - OHFL","Full advance - Cash"
+            ,"Full advance OHFL","Total To Pay - Cash","Total To Pay - Cash, Cheque","Total To Pay OHFL"};
 
     private int LOADING_POINT_REQUEST_CODE = 1;
     private int TRIP_DESTINATION_REQUEST_CODE = 2;
+   // private int hour,minutes,hourOfDay;
+
+    private EditText etLoadingTime;
 
     @Nullable
     @Override
@@ -62,7 +75,6 @@ public class PlaceOrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Logistics");
 
         tvNotificationText = view.findViewById(R.id.tv_notification_text);
         ivCloseNotification = view.findViewById(R.id.iv_close_notification);
@@ -71,7 +83,14 @@ public class PlaceOrderFragment extends Fragment {
         etTripDestination = view.findViewById(R.id.et_place_order_trip_destination);
         etTruckType = view.findViewById(R.id.et_place_order_truck_type);
         etMaterialType = view.findViewById(R.id.et_place_order_material_type);
+        etLoadingDate = view.findViewById(R.id.et_place_order_loading_date);
+
         etLoadingTime = view.findViewById(R.id.et_place_order_loading_time);
+
+
+        spPaymentType = view.findViewById(R.id.sp_place_order_payment_type);
+        spNoOfTrucks = view.findViewById(R.id.sp_place_order_no_of_trucks);
+
         etRemarks = view.findViewById(R.id.et_place_order_remarks);
 
         btPlaceOrder = view.findViewById(R.id.bt_place_order);
@@ -432,7 +451,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeOne.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_1));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeTwo.setOnClickListener(new View.OnClickListener() {
@@ -441,7 +460,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeTwo.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_2));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeThree.setOnClickListener(new View.OnClickListener() {
@@ -450,7 +469,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeThree.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_3));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeFour.setOnClickListener(new View.OnClickListener() {
@@ -459,7 +478,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeFour.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_4));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeFive.setOnClickListener(new View.OnClickListener() {
@@ -468,7 +487,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeFive.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_5));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeSix.setOnClickListener(new View.OnClickListener() {
@@ -477,7 +496,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeSix.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_6));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeSeven.setOnClickListener(new View.OnClickListener() {
@@ -486,7 +505,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeSeven.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_7));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeEight.setOnClickListener(new View.OnClickListener() {
@@ -495,7 +514,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeEight.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_8));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeNine.setOnClickListener(new View.OnClickListener() {
@@ -504,7 +523,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeNine.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_9));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeTen.setOnClickListener(new View.OnClickListener() {
@@ -513,7 +532,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeTen.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_10));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeEleven.setOnClickListener(new View.OnClickListener() {
@@ -522,7 +541,7 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeEleven.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_11));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
                     }
                 });
                 llMaterialTypeTwelve.setOnClickListener(new View.OnClickListener() {
@@ -531,11 +550,13 @@ public class PlaceOrderFragment extends Fragment {
                         llMaterialTypeTwelve.setBackgroundColor(getResources().getColor(R.color.green));
                         etMaterialType.setText(getString(R.string.material_type_12));
                         dialog.dismiss();
-                        etLoadingTime.setVisibility(View.VISIBLE);
+                        etLoadingDate.setVisibility(View.VISIBLE);
+
                     }
                 });
             }
         });
+
 
         final Calendar calendar = Calendar.getInstance();
 
@@ -547,11 +568,36 @@ public class PlaceOrderFragment extends Fragment {
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel(calendar);
+
+
+
+
+
             }
+
 
         };
 
-        etLoadingTime.setOnClickListener(new View.OnClickListener() {
+        final Calendar calendar1 = Calendar.getInstance();
+
+
+        final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                calendar1.set(Calendar.HOUR_OF_DAY,i);
+                calendar1.set(Calendar.MINUTE,i1);
+                update(calendar1);
+            }
+
+
+        };
+
+
+
+
+
+
+        etLoadingDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(getActivity(), date, calendar
@@ -559,6 +605,103 @@ public class PlaceOrderFragment extends Fragment {
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+        etLoadingTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new TimePickerDialog(getActivity(),time,calendar1
+                .get(Calendar.HOUR),calendar1.get(Calendar.MINUTE),false).show();
+            }
+        });
+
+
+        final ArrayAdapter<String> spPaymentTypeAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item, spPaymentTypeList);
+        spPaymentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spPaymentType.setAdapter(spPaymentTypeAdapter);
+        spPaymentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch(i){
+
+                    case 1:
+                        spNoOfTrucks.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        spNoOfTrucks.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        spNoOfTrucks.setVisibility(View.VISIBLE);
+                        break;
+                    case 4:
+                        spNoOfTrucks.setVisibility(View.VISIBLE);
+                        break;
+                    case 5:
+                        spNoOfTrucks.setVisibility(View.VISIBLE);
+                        break;
+                    case 6:
+                        spNoOfTrucks.setVisibility(View.VISIBLE);
+                        break;
+                    case 7:
+                        spNoOfTrucks.setVisibility(View.VISIBLE);
+                        break;
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        /*spNoOfTrucksList[0]="No of Trucks";
+        for(int i=1;i<6;i++){
+            spNoOfTrucksList[i] = String.format("No of Trucks : " + i);
+        }*/
+
+        ArrayAdapter<String> spNoOfTrucksAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item, spNoOfTrucksList);
+        spNoOfTrucksAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spNoOfTrucks.setAdapter(spNoOfTrucksAdapter);
+        spNoOfTrucks.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch(i){
+                    case 0:
+                        break;
+                    case 1:
+                        etRemarks.setVisibility(View.VISIBLE);
+                        btPlaceOrder.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        etRemarks.setVisibility(View.VISIBLE);
+                        btPlaceOrder.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        etRemarks.setVisibility(View.VISIBLE);
+                        btPlaceOrder.setVisibility(View.VISIBLE);
+                        break;
+                    case 4:
+                        etRemarks.setVisibility(View.VISIBLE);
+                        btPlaceOrder.setVisibility(View.VISIBLE);
+                        break;
+                    case 5:
+                        etRemarks.setVisibility(View.VISIBLE);
+                        btPlaceOrder.setVisibility(View.VISIBLE);
+                        break;
+
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
 
         etRemarks.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -605,7 +748,7 @@ public class PlaceOrderFragment extends Fragment {
                                etTripDestination.getText().toString(),
                                etTruckType.getText().toString(),
                                etMaterialType.getText().toString(),
-                               etLoadingTime.getText().toString()
+                               etLoadingDate.getText().toString()
                             ));
                     String remarks = "";
                     if (etRemarks.getText().toString().equals("")){
@@ -618,7 +761,7 @@ public class PlaceOrderFragment extends Fragment {
                             etTripDestination.getText().toString(),
                             etTruckType.getText().toString(),
                             etMaterialType.getText().toString(),
-                            etLoadingTime.getText().toString(),
+                            etLoadingDate.getText().toString(),
                             remarks,
                             "No",
                             SharedPrefManager.getInstance(getContext()).getEmail()
@@ -628,7 +771,10 @@ public class PlaceOrderFragment extends Fragment {
                     etTripDestination.setVisibility(View.GONE);
                     etTruckType.setVisibility(View.GONE);
                     etMaterialType.setVisibility(View.GONE);
-                    etLoadingTime.setVisibility(View.GONE);
+                    etLoadingDate.setVisibility(View.GONE);
+                    etLoadgTime.setVisibility(View.GONE);
+                    spNoOfTrucks.setVisibility(View.GONE);
+                    spPaymentType.setVisibility(View.GONE);
                     etRemarks.setVisibility(View.GONE);
                     btPlaceOrder.setVisibility(View.GONE);
                     etLoadingPoint.setText("");
@@ -677,13 +823,22 @@ public class PlaceOrderFragment extends Fragment {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null;
     }
+    void update(Calendar calendar1) {
+
+        String myFormat = "hh:mm aa";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        etLoadingTime.setText(sdf.format(calendar1.getTime()));
+        spPaymentType.setVisibility(View.VISIBLE);
+
+    }
+
 
     private void updateLabel(Calendar calendar) {
+
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        etLoadingTime.setText(sdf.format(calendar.getTime()));
-        etRemarks.setVisibility(View.VISIBLE);
-        btPlaceOrder.setVisibility(View.VISIBLE);
+        etLoadingDate.setText(sdf.format(calendar.getTime()));
+        etLoadingTime.setVisibility(View.VISIBLE);
     }
 
     @Override

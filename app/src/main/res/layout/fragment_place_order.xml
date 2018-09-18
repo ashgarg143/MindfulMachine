@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white">
 
     <ScrollView
@@ -130,7 +131,7 @@
                 android:drawablePadding="16dp"/>
 
             <EditText
-                android:id="@+id/et_place_order_loading_time"
+                android:id="@+id/et_place_order_loading_date"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:hint="Loading Date (MM/DD/YY)"
@@ -148,6 +149,56 @@
                 android:longClickable="false"
                 android:drawableLeft="@drawable/ic_date_range_black_24dp"
                 android:drawablePadding="16dp"/>
+
+            <EditText
+                android:id="@+id/et_place_order_loading_time"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Loading Time (11:00AM)"
+                android:inputType="textNoSuggestions"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginTop="20dp"
+                android:focusable="false"
+                android:visibility="gone"
+                android:clickable="true"
+                android:longClickable="false"
+                android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                android:drawablePadding="16dp"/>
+
+
+            <Spinner
+                android:prompt="@string/app_name"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:visibility="gone"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:layout_marginTop="20dp"
+                android:spinnerMode="dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/sp_place_order_payment_type"/>
+
+            <Spinner
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:visibility="gone"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:layout_marginTop="20dp"
+                android:spinnerMode="dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/sp_place_order_no_of_trucks"/>
 
             <EditText
                 android:id="@+id/et_place_order_remarks"

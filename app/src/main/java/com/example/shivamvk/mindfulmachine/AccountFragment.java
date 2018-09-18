@@ -49,7 +49,7 @@ public class AccountFragment extends Fragment {
             ,ivUploadPanCard;
     private CardView cvLogout;
     private EditText etAccountUserName,etAccountUserEmail,etAccountUserNumber,etAccountUserAlternateNumber;
-    private RelativeLayout rlUploadPANCard;
+    private RelativeLayout rlUploadPANCard,rlUploadAddressProof,rlUploadVisitingCard;
 
     private static final int PHOTO_PICKER_ADHAAR = 123;
     private static final int PHOTO_PICKER_PAN_CARD = 456;
@@ -85,13 +85,29 @@ public class AccountFragment extends Fragment {
         ivAccountAlternateNumberNotVerified = view.findViewById(R.id.iv_account_alternate_number_not_verified);
 
         rlUploadPANCard = view.findViewById(R.id.rl_upload_pan_card_activity_account);
+        rlUploadAddressProof = view.findViewById(R.id.rl_upload_address_proof_activity_account);
+        rlUploadVisitingCard = view.findViewById(R.id.rl_upload_visiting_card_activity_account);
+
         rlUploadPANCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),UploadActivity.class));
             }
         });
-        ivUploadPanCard = view.findViewById(R.id.iv_dummy_image_pan_card);
+
+        rlUploadAddressProof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),UploadActivity.class));
+            }
+        });
+
+        rlUploadVisitingCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),UploadActivity.class));
+            }
+        });
 
 /*
         ivUploadPanCard.setOnClickListener(new View.OnClickListener() {

@@ -304,8 +304,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_below="@+id/tv_pan_card_personal"
                     android:background="@drawable/rounded_edit_text_with_border"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp">
+                    android:layout_width="110dp"
+                    android:layout_height="110dp">
 
                     <ImageView
                         android:id="@+id/iv_upload_pan_card_activity_account"
@@ -367,14 +367,15 @@
                     android:text="(Eg.Adhaar,Voter Card, DL, Passport etc)"/>
 
                 <RelativeLayout
+                    android:id="@+id/rl_upload_address_proof_activity_account"
                     android:layout_marginTop="8dp"
                     android:layout_below="@+id/tv_address_proof"
                     android:background="@drawable/rounded_edit_text_with_border"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp">
+                    android:layout_width="110dp"
+                    android:layout_height="110dp">
 
                     <ImageView
-                        android:id="@+id/iv_upload_addroof_activity_account"
+                        android:id="@+id/iv_upload_address_proof_activity_account"
                         android:visibility="gone"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="4dp"
@@ -436,11 +437,12 @@
                     android:text="(of your transport firm)"/>
 
                 <RelativeLayout
+                    android:id="@+id/rl_upload_visiting_card_activity_account"
                     android:layout_marginTop="8dp"
                     android:layout_below="@+id/tv_visiting_card"
                     android:background="@drawable/rounded_edit_text_with_border"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp">
+                    android:layout_width="110dp"
+                    android:layout_height="110dp">
 
                     <ImageView
                         android:id="@+id/iv_upload_visiting_card_activity_account"

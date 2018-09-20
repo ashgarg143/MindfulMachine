@@ -75,7 +75,7 @@ public class PlaceOrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        getActivity().setTitle("Mindful Machine");
         tvNotificationText = view.findViewById(R.id.tv_notification_text);
         ivCloseNotification = view.findViewById(R.id.iv_close_notification);
         rlNoificationHeader = view.findViewById(R.id.rl_notification_header);
@@ -580,7 +580,6 @@ public class PlaceOrderFragment extends Fragment {
 
         final Calendar calendar1 = Calendar.getInstance();
 
-
         final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
@@ -591,11 +590,6 @@ public class PlaceOrderFragment extends Fragment {
 
 
         };
-
-
-
-
-
 
         etLoadingDate.setOnClickListener(new View.OnClickListener() {
             @Override

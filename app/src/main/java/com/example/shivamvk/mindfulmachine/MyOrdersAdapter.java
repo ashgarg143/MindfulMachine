@@ -25,13 +25,13 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.order_item_layout, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.my_order_item_layout, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Order order = listOfOrders.get(i);
+        /*Order order = listOfOrders.get(i);
 
         String orderid = "Order id: " + generateHash(
                 order.getLoadingPoint(),
@@ -98,27 +98,29 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         if (hash < 0){
             hash = hash * -1;
         }
-        return hash + "";
+        return hash + "";*/
     }
 
     @Override
     public int getItemCount() {
-        return listOfOrders.size();
+       // return listOfOrders.size();
+
+        return 3;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-
+/*
         private TextView tvOrderItemLoadingPoint,tvOrderItemTripDestination,tvOrderItemTruckType,tvOrderItemMaterialType,tvOrderItemLoadingTime,
                 tvOrderItemOrderId,tvOrderItemRemarks;
 
         private ImageView ivOrderItemTruckType;
 
-        private Button btOrderItemStatus;
+        private Button btOrderItemStatus;*/
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivOrderItemTruckType = itemView.findViewById(R.id.iv_order_item_truck_type);
+           /* ivOrderItemTruckType = itemView.findViewById(R.id.iv_order_item_truck_type);
 
             tvOrderItemLoadingPoint = itemView.findViewById(R.id.tv_order_item_loading_point);
             tvOrderItemTripDestination = itemView.findViewById(R.id.tv_order_item_trip_destination);
@@ -127,7 +129,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
             tvOrderItemLoadingTime = itemView.findViewById(R.id.tv_order_item_loading_time);
             tvOrderItemOrderId = itemView.findViewById(R.id.tv_order_item_order_id);
             tvOrderItemRemarks = itemView.findViewById(R.id.tv_order_item_remarks);
-            btOrderItemStatus =itemView.findViewById(R.id.bt_order_item_status);
+            btOrderItemStatus =itemView.findViewById(R.id.bt_order_item_status);*/
         }
     }
 }

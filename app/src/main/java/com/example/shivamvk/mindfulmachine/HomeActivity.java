@@ -30,8 +30,8 @@ public class HomeActivity extends AppCompatActivity {
                     break;
                 case R.id.navigation_orders:
                     getSupportActionBar().hide();
-                   // fragment = new MyOrdersFragment();
-                    startActivity(new Intent(HomeActivity.this,MyActivity.class));
+                     fragment = new MyOrdersFragment();
+                    //startActivity(new Intent(HomeActivity.this,MyActivity.class));
                     break;
                 case R.id.navigation_account:
                     getSupportActionBar().hide();

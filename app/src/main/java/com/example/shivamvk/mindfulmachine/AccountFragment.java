@@ -91,7 +91,9 @@ public class AccountFragment extends Fragment {
         rlUploadPANCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),UploadActivity.class));
+                Intent intent = new Intent(getActivity(),UploadActivity.class);
+                intent.putExtra("documentname","PAN CARD");
+                startActivity(intent);
             }
         });
 
@@ -105,7 +107,9 @@ public class AccountFragment extends Fragment {
         rlUploadVisitingCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),UploadActivity.class));
+                Intent intent = new Intent(getActivity(),UploadActivity.class);
+                intent.putExtra("documentname","VISITING CARD");
+                startActivity(intent);
             }
         });
 

@@ -27,7 +27,7 @@ public class CreateOrderFragment extends Fragment {
             public void onClick(View view) {
                 Fragment fragment = new PlaceOrderFragment();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fl_home_activity,fragment);
+                fragmentTransaction.add(R.id.fl_home_activity,fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 

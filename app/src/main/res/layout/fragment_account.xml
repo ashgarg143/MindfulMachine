@@ -227,41 +227,6 @@
                     android:hint="Alternate Number"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/tv_account_alternate_number_not_verified"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/et_account_alternate_user_number"
-                    android:text="Not verified. Click here to verify! "
-                    android:textColor="@android:color/holo_red_dark"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/iv_account_alternate_number_not_verified"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_below="@+id/et_account_alternate_user_number"
-                    android:layout_toRightOf="@+id/tv_account_alternate_number_not_verified"
-                    android:src="@drawable/ic_error_black_24dp"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/tv_account_alternate_number_verified"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/et_account_alternate_user_number"
-                    android:text="Verified "
-                    android:textColor="@android:color/holo_green_dark"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/iv_account_alternate_number_verified"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_below="@+id/et_account_alternate_user_number"
-                    android:layout_toRightOf="@+id/tv_account_alternate_number_verified"
-                    android:src="@drawable/ic_check_circle_black_24dp"
-                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -482,7 +447,32 @@
                 android:background="@android:color/darker_gray" />
 
 
+            <Button
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_edit_text_dark"
+                android:text="Save changes"
+                android:textColor="@android:color/white"
+                android:id="@+id/bt_dialog_edit_save"/>
+
+            <Button
+                android:id="@+id/bt_logout"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_edit_text_blue"
+                android:text="Logout"
+                android:textColor="@android:color/white"/>
+
             <android.support.v7.widget.CardView
+                android:visibility="gone"
                 android:id="@+id/cv_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

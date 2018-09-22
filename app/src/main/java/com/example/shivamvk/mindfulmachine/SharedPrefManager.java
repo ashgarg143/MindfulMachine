@@ -20,7 +20,10 @@ public class SharedPrefManager {
         return sharedPrefManager;
     }
 
-    public void LoginUser(String name, String email, String number, String emailverified, String numberverified, String companyname, String address, String kycdone){
+
+
+    public void LoginUser(String name, String email, String number, String emailverified, String numberverified, String companyname
+            , String address){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("name", name);
@@ -30,13 +33,79 @@ public class SharedPrefManager {
         editor.putString("numberverified", numberverified);
         editor.putString("companyname", companyname);
         editor.putString("address", address);
-        editor.putString("kycdone", kycdone);
+
         editor.apply();
     }
 
-    public String isKycDone(){
+    public void aadharcardfront(String aadharcardfront){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
-        return sharedPreferences.getString("kycdone","No");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("aadharcardfront",aadharcardfront);
+        editor.apply();
+    }
+
+    public void aadharcardback(String aadharcardback){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("aadharcardback",aadharcardback);
+        editor.apply();
+    }
+    public void pancardfront(String pancardfront){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("pancardfront",pancardfront);
+        editor.apply();
+    }
+
+    public void visitingcardback(String visitingcardback){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("visitingcardback",visitingcardback);
+        editor.apply();
+    }
+    public void visitingcardfront(String visitingcardfront){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("visitingcardfront",visitingcardfront);
+        editor.apply();
+    }
+
+    public void pancardback(String pancardback){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("pancardback",pancardback);
+        editor.apply();
+    }
+
+
+    public String getPanCardFrontUrl(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("pancardfront","Not provided");
+    }
+
+    public String getPanCardBackUrl(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("pancardback","Not provided");
+    }
+
+    public String getAadharCardFrontUrl(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("aadharcardfront","Not provided");
+    }
+
+    public String getAadharCardBackUrl(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("aadharcardback","Not provided");
+    }
+
+    public String getVisitingCardFrontUrl(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("visitingcardfront","Not provided");
+    }
+
+    public String getVisitingCardBackUrl(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("visitingcardback","Not provided");
     }
 
     public String isLoggedIn(){
@@ -78,6 +147,8 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString("address","Not provided");
     }
+
+
 
     public void Logout(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

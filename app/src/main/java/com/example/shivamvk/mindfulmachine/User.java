@@ -1,10 +1,10 @@
 package com.example.shivamvk.mindfulmachine;
 
 public class User {
-    String name,email,number,emailverified,numberverified,usertype,companyname,address,kycdone;
+    String name,email,number,emailverified,numberverified,usertype,companyname,address;
 
 
-    public User(String name, String email, String number, String emailverified, String numberverified, String usertype, String companyname, String address, String kycdone) {
+    public User(String name, String email, String number, String emailverified, String numberverified, String usertype, String companyname, String address) {
         this.name = name;
         this.email = email;
         this.number = number;
@@ -13,7 +13,6 @@ public class User {
         this.usertype = usertype;
         this.companyname = companyname;
         this.address = address;
-        this.kycdone = kycdone;
     }
 
     public String getCompanyname() {
@@ -24,9 +23,6 @@ public class User {
         return address;
     }
 
-    public String getKycdone() {
-        return kycdone;
-    }
 
     public String getName() {
         return name;

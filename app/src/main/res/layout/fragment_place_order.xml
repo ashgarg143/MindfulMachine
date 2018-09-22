@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white">
@@ -16,6 +16,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:layout_marginBottom="100dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/holo_blue_dark"
@@ -43,9 +44,9 @@
             </RelativeLayout>
 
             <TextView
+                android:layout_marginBottom="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
                 android:text="Place an order"
                 android:gravity="center"
                 android:textSize="18sp"
@@ -63,7 +64,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginBottom="20dp"
                 android:focusable="false"
                 android:clickable="true"
                 android:longClickable="false"
@@ -82,7 +83,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:focusable="false"
                 android:visibility="gone"
                 android:clickable="true"
@@ -102,7 +103,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:focusable="false"
                 android:visibility="gone"
                 android:clickable="true"
@@ -122,7 +123,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:focusable="false"
                 android:visibility="gone"
                 android:clickable="true"
@@ -142,7 +143,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:focusable="false"
                 android:visibility="gone"
                 android:clickable="true"
@@ -162,7 +163,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:focusable="false"
                 android:visibility="gone"
                 android:clickable="true"
@@ -180,7 +181,7 @@
                 android:visibility="gone"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:spinnerMode="dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -194,7 +195,7 @@
                 android:visibility="gone"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:spinnerMode="dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -213,7 +214,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="32dp"
                 android:focusable="false"
                 android:visibility="gone"
                 android:clickable="true"
@@ -235,7 +236,6 @@
                 android:layout_marginRight="32dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="32dp"
                 android:visibility="gone"
                 android:layout_marginBottom="32dp"/>
 

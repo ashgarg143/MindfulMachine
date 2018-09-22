@@ -47,6 +47,7 @@ public class AccountFragment extends Fragment {
     private ImageView ivAccountEditNumber, ivAccountEmailNotVerified,
             ivAccountEmailVerified,ivAccountAlternateNumberVerified,ivAccountAlternateNumberNotVerified
             ,ivUploadPanCard;
+    private Button btLogout;
     private CardView cvLogout;
     private EditText etAccountUserName,etAccountUserEmail,etAccountUserNumber,etAccountUserAlternateNumber;
     private RelativeLayout rlUploadPANCard,rlUploadAddressProof,rlUploadVisitingCard;
@@ -75,15 +76,16 @@ public class AccountFragment extends Fragment {
         ivAccountEmailNotVerified = view.findViewById(R.id.iv_account_email_not_verified);
         ivAccountEmailVerified = view.findViewById(R.id.iv_account_email_verified);
 
+
         etAccountUserNumber = view.findViewById(R.id.et_account_user_number);
 
 
         etAccountUserAlternateNumber = view.findViewById(R.id.et_account_alternate_user_number);
-        tvAccountAlternateNumberVerified = view.findViewById(R.id.tv_account_alternate_number_verified);
+        /*tvAccountAlternateNumberVerified = view.findViewById(R.id.tv_account_alternate_number_verified);
         tvAccountAlternateNumberNotVerified = view.findViewById(R.id.tv_account_alternate_number_not_verified);
         ivAccountAlternateNumberVerified = view.findViewById(R.id.iv_account_alternate_number_verified);
         ivAccountAlternateNumberNotVerified = view.findViewById(R.id.iv_account_alternate_number_not_verified);
-
+*/
         rlUploadPANCard = view.findViewById(R.id.rl_upload_pan_card_activity_account);
         rlUploadAddressProof = view.findViewById(R.id.rl_upload_address_proof_activity_account);
         rlUploadVisitingCard = view.findViewById(R.id.rl_upload_visiting_card_activity_account);
@@ -100,7 +102,9 @@ public class AccountFragment extends Fragment {
         rlUploadAddressProof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),UploadActivity.class));
+                Intent intent = new Intent(getActivity(),UploadActivity.class);
+                intent.putExtra("documentname","AADHAR CARD");
+                startActivity(intent);
             }
         });
 
@@ -113,51 +117,16 @@ public class AccountFragment extends Fragment {
             }
         });
 
-/*
-        ivUploadPanCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (tvAccountUploadAadhar.getText().toString().equals("Upload Aadhar")) {
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("image/jpeg");
-                    intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                    startActivityForResult(Intent.createChooser(intent, "Complete action using"), PHOTO_PICKER_AADHAR);
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("Your Aadhar Card");
-                    View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_view_aadhar, null, false);
-                    builder.setView(view1);
-                    ImageView ivAadhar = view1.findViewById(R.id.iv_dialog_view_aadhar);
-                    Picasso.get()
-                            .load(SharedPrefManager.getInstance(getContext()).isKycDone())
-                            .placeholder(R.drawable.aadharplaceholder)
-                            .into(ivAadhar);
-                    builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            //do nothing
-                        }
-                    });
-                    builder.show();
-                }
-            }
-        });
-*/
-
-
-
-
-
-
 
        /* tvAccountUploadAadhar = view.findViewById(R.id.tv_account_upload_aadhar);
 
         cvUploadAadhar = view.findViewById(R.id.cv_account_upload_aadhar);
-        if(!SharedPrefManager.getInstance(getContext()).isKycDone().equals("No")){
+        if(!SharedPrefManager.getInstance(getContext()).getPanCardFrontUrl().equals("No")){
             tvAccountUploadAadhar.setText("Aadhar uploaded");
         }*/
 
         cvLogout = view.findViewById(R.id.cv_logout);
+        btLogout = view.findViewById(R.id.bt_logout);
 
 
 
@@ -236,9 +205,9 @@ public class AccountFragment extends Fragment {
                                                                 "Yes",
                                                                 "Yes",
                                                                 "Not provided",
-                                                                "Not provided",
-                                                                "No"
+                                                                "Not provided"
                                                         );
+
                                                         Fragment fragment=new AccountFragment();
                                                         FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
                                                         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
@@ -320,6 +289,7 @@ public class AccountFragment extends Fragment {
                     etDialogAddress.setText(SharedPrefManager.getInstance(getContext()).getAddress());
                 }
 
+/*
                 btDialogEditSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -350,8 +320,7 @@ public class AccountFragment extends Fragment {
                                                             "No",
                                                             "Yes",
                                                             "Not provided",
-                                                            etDialogAddress.getText().toString(),
-                                                            SharedPrefManager.getInstance(getContext()).isKycDone()
+                                                            etDialogAddress.getText().toString()
                                                     );
                                         } else if(SharedPrefManager.getInstance(getContext()).isEmailVerified().equals("Yes")){
                                             SharedPrefManager.getInstance(getContext())
@@ -361,8 +330,7 @@ public class AccountFragment extends Fragment {
                                                             "Yes",
                                                             "Yes",
                                                             "Not provided",
-                                                            etDialogAddress.getText().toString(),
-                                                            SharedPrefManager.getInstance(getContext()).isKycDone()
+                                                            etDialogAddress.getText().toString()
                                                     );
                                         }
 
@@ -432,10 +400,22 @@ public class AccountFragment extends Fragment {
                         return true;
                     }
                 });
+*/
             }
         });
 
         cvLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPrefManager.getInstance(getContext()).Logout();
+                Intent intent = new Intent(getContext(), OnBoardingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
+        btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPrefManager.getInstance(getContext()).Logout();
@@ -462,7 +442,7 @@ public class AccountFragment extends Fragment {
                     builder.setView(view1);
                     ImageView ivAadhar = view1.findViewById(R.id.iv_dialog_view_aadhar);
                     Picasso.get()
-                            .load(SharedPrefManager.getInstance(getContext()).isKycDone())
+                            .load(SharedPrefManager.getInstance(getContext()).getPanCardFrontUrl())
                             .placeholder(R.drawable.aadharplaceholder)
                             .into(ivAadhar);
                     builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {

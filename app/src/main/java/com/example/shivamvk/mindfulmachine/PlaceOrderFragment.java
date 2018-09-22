@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -50,7 +51,7 @@ public class PlaceOrderFragment extends Fragment {
     private TextView tvNotificationText;
     private ImageView ivCloseNotification;
     private RelativeLayout rlNoificationHeader;
-    private EditText etLoadingPoint,etTripDestination,etTruckType,etMaterialType, etLoadingDate,etLoadgTime,etRemarks;
+    private EditText etLoadingPoint,etTripDestination,etTruckType,etMaterialType, etLoadingDate,etLoadingTime,etRemarks;
     private Button btPlaceOrder;
 
     private Spinner spPaymentType,spNoOfTrucks;
@@ -63,8 +64,6 @@ public class PlaceOrderFragment extends Fragment {
     private int TRIP_DESTINATION_REQUEST_CODE = 2;
    // private int hour,minutes,hourOfDay;
 
-    private EditText etLoadingTime;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,6 +75,7 @@ public class PlaceOrderFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Mindful Machine");
+
         tvNotificationText = view.findViewById(R.id.tv_notification_text);
         ivCloseNotification = view.findViewById(R.id.iv_close_notification);
         rlNoificationHeader = view.findViewById(R.id.rl_notification_header);
@@ -567,15 +567,9 @@ public class PlaceOrderFragment extends Fragment {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel(calendar);
-
-
-
-
+                updateDateLabel(calendar);
 
             }
-
-
         };
 
         final Calendar calendar1 = Calendar.getInstance();
@@ -585,7 +579,7 @@ public class PlaceOrderFragment extends Fragment {
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 calendar1.set(Calendar.HOUR_OF_DAY,i);
                 calendar1.set(Calendar.MINUTE,i1);
-                update(calendar1);
+                updateTimeLabel(calendar1);
             }
 
 
@@ -604,12 +598,12 @@ public class PlaceOrderFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 new TimePickerDialog(getActivity(),time,calendar1
-                .get(Calendar.HOUR),calendar1.get(Calendar.MINUTE),false).show();
+                .get(Calendar.HOUR_OF_DAY),calendar1.get(Calendar.MINUTE),false).show();
             }
         });
 
 
-        final ArrayAdapter<String> spPaymentTypeAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item, spPaymentTypeList);
+        ArrayAdapter<String> spPaymentTypeAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item, spPaymentTypeList);
         spPaymentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPaymentType.setAdapter(spPaymentTypeAdapter);
         spPaymentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -649,10 +643,6 @@ public class PlaceOrderFragment extends Fragment {
             }
         });
 
-        /*spNoOfTrucksList[0]="No of Trucks";
-        for(int i=1;i<6;i++){
-            spNoOfTrucksList[i] = String.format("No of Trucks : " + i);
-        }*/
 
         ArrayAdapter<String> spNoOfTrucksAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item, spNoOfTrucksList);
         spNoOfTrucksAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -683,9 +673,8 @@ public class PlaceOrderFragment extends Fragment {
                         etRemarks.setVisibility(View.VISIBLE);
                         btPlaceOrder.setVisibility(View.VISIBLE);
                         break;
-
-
                 }
+
             }
 
             @Override
@@ -693,8 +682,6 @@ public class PlaceOrderFragment extends Fragment {
 
             }
         });
-
-
 
 
         etRemarks.setOnClickListener(new View.OnClickListener() {
@@ -706,7 +693,6 @@ public class PlaceOrderFragment extends Fragment {
                 Button btRemarksSubmit = view1.findViewById(R.id.bt_remarks_submit);
 
                 builder.setView(view1);
-
                 final AlertDialog dialog=builder.show();
 
                 btRemarksSubmit.setOnClickListener(new View.OnClickListener() {
@@ -742,7 +728,8 @@ public class PlaceOrderFragment extends Fragment {
                                etTripDestination.getText().toString(),
                                etTruckType.getText().toString(),
                                etMaterialType.getText().toString(),
-                               etLoadingDate.getText().toString()
+                               etLoadingDate.getText().toString(),
+                               etLoadingTime.getText().toString()
                             ));
                     String remarks = "";
                     if (etRemarks.getText().toString().equals("")){
@@ -750,23 +737,31 @@ public class PlaceOrderFragment extends Fragment {
                     } else {
                         remarks = etRemarks.getText().toString();
                     }
+
+                    String[] noOfTrucks = spNoOfTrucks.getSelectedItem().toString().split(": ");
+
                     Order order = new Order(
                             etLoadingPoint.getText().toString(),
                             etTripDestination.getText().toString(),
                             etTruckType.getText().toString(),
                             etMaterialType.getText().toString(),
                             etLoadingDate.getText().toString(),
+                            etLoadingTime.getText().toString(),
+                            spPaymentType.getSelectedItem().toString(),
+                            noOfTrucks[1],
                             remarks,
                             "No",
                             SharedPrefManager.getInstance(getContext()).getEmail()
                     );
+
+                    Toast.makeText(getContext(), "order: "+ order, Toast.LENGTH_SHORT).show();
                     reference.setValue(order);
                     progressDialog.dismiss();
                     etTripDestination.setVisibility(View.GONE);
                     etTruckType.setVisibility(View.GONE);
                     etMaterialType.setVisibility(View.GONE);
                     etLoadingDate.setVisibility(View.GONE);
-                    etLoadgTime.setVisibility(View.GONE);
+                    etLoadingTime.setVisibility(View.GONE);
                     spNoOfTrucks.setVisibility(View.GONE);
                     spPaymentType.setVisibility(View.GONE);
                     etRemarks.setVisibility(View.GONE);
@@ -788,9 +783,9 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
-    private String generateHash(String s, String s1, String s2, String s3, String s4) {
+    private String generateHash(String s, String s1, String s2, String s3, String s4, String s5) {
         int hash = 21;
-        String main = s + s1 + s2 + s3 + s4;
+        String main = s + s1 + s2 + s3 + s4 + s5;
         for (int i = 0; i < main.length(); i++) {
             hash = hash*31 + main.charAt(i);
         }
@@ -817,7 +812,7 @@ public class PlaceOrderFragment extends Fragment {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null;
     }
-    void update(Calendar calendar1) {
+    void updateTimeLabel(Calendar calendar1) {
 
         String myFormat = "hh:mm aa";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -827,7 +822,7 @@ public class PlaceOrderFragment extends Fragment {
     }
 
 
-    private void updateLabel(Calendar calendar) {
+    private void updateDateLabel(Calendar calendar) {
 
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);

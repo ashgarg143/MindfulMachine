@@ -170,10 +170,12 @@ public class SignUpActivity extends AppCompatActivity implements VerificationLis
                                     "Yes",
                                     "Normal",
                                     "Not provided",
-                                    "Not provided",
-                                    "No"
+                                    "Not provided"
                             );
                             reference.setValue(user);
+                            String notProvided = "Not provided";
+                            DocumentImages images = new DocumentImages(notProvided,notProvided,notProvided,notProvided,notProvided,notProvided);
+                            reference.child("documentimages").setValue(images);
                             progressDialog.dismiss();
                             SharedPrefManager.getInstance(SignUpActivity.this)
                                     .LoginUser(etSignupName.getText().toString(),
@@ -182,9 +184,14 @@ public class SignUpActivity extends AppCompatActivity implements VerificationLis
                                             "No",
                                             "Yes",
                                             "Not provided",
-                                            "Not provided",
-                                            "No"
+                                            "Not provided"
                                             );
+                            SharedPrefManager.getInstance(getBaseContext()).pancardfront(notProvided);
+                            SharedPrefManager.getInstance(getBaseContext()).pancardback(notProvided);
+                            SharedPrefManager.getInstance(getBaseContext()).aadharcardback(notProvided);
+                            SharedPrefManager.getInstance(getBaseContext()).aadharcardfront(notProvided);
+                            SharedPrefManager.getInstance(getBaseContext()).visitingcardback(notProvided);
+                            SharedPrefManager.getInstance(getBaseContext()).visitingcardback(notProvided);
                             Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

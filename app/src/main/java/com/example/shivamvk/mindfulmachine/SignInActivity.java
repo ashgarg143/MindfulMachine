@@ -264,7 +264,12 @@ public class SignInActivity extends AppCompatActivity implements VerificationLis
                 String emailverified = dataSnapshot.child("emailverified").getValue().toString();
                 String companyname = dataSnapshot.child("companyname").getValue().toString();
                 String address = dataSnapshot.child("address").getValue().toString();
-                String kycdone = dataSnapshot.child("kycdone").getValue().toString();
+                String pancardfront = dataSnapshot.child("documentimages").child("pancardfront").getValue().toString();
+                String pancardback = dataSnapshot.child("documentimages").child("pancardback").getValue().toString();
+                String aadharcardfront = dataSnapshot.child("documentimages").child("aadharcardfront").getValue().toString();
+                String aadharcardback = dataSnapshot.child("documentimages").child("aadharcardback").getValue().toString();
+                String visitingcardfront = dataSnapshot.child("documentimages").child("visitingcardfront").getValue().toString();
+                String visitingcardback = dataSnapshot.child("documentimages").child("visitingcardback").getValue().toString();
                 SharedPrefManager.getInstance(SignInActivity.this).LoginUser(
                         name,
                         email,
@@ -272,9 +277,16 @@ public class SignInActivity extends AppCompatActivity implements VerificationLis
                         emailverified,
                         "Yes",
                         companyname,
-                        address,
-                        kycdone
+                        address
+
                 );
+
+                SharedPrefManager.getInstance(getBaseContext()).pancardfront(pancardfront);
+                SharedPrefManager.getInstance(getBaseContext()).pancardback(pancardback);
+                SharedPrefManager.getInstance(getBaseContext()).aadharcardfront(aadharcardfront);
+                SharedPrefManager.getInstance(getBaseContext()).aadharcardback(aadharcardback);
+                SharedPrefManager.getInstance(getBaseContext()).visitingcardfront(visitingcardfront);
+                SharedPrefManager.getInstance(getBaseContext()).visitingcardback(visitingcardback);
                 otpprogressDialog.dismiss();
                 Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

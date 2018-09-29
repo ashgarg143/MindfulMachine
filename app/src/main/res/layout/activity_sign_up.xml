@@ -105,7 +105,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_edit_text_dark"
+                    android:background="@drawable/rounded_edit_text_red"
                     android:text="Sign Up"
                     android:textColor="@android:color/white"
                     android:visibility="gone"
@@ -116,7 +116,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_edit_text_dark"
+                    android:background="@drawable/rounded_edit_text_red"
                     android:text="Request Otp"
                     android:textColor="@android:color/white"
                     android:id="@+id/bt_signup_request_otp"

@@ -1,8 +1,10 @@
 package com.example.shivamvk.mindfulmachine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        /*Order order = listOfOrders.get(i);
+        Order order = listOfOrders.get(i);
 
         String orderid = "Order id: " + generateHash(
                 order.getLoadingPoint(),
@@ -41,12 +43,12 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
                 order.getLoadingDate()
         );
 
-        viewHolder.tvOrderItemOrderId.setText(orderid);
+        // viewHolder.tvOrderItemOrderId.setText(orderid);
 
         String loadingPoint = order.getLoadingPoint();
         String destinationPoint = order.getTripDestination();
         String trucktype = order.getTruckType();
-
+/*
         char chartruck = trucktype.charAt(0);
 
         switch (chartruck){
@@ -58,35 +60,45 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
                 break;
             case 'T':
                 viewHolder.ivOrderItemTruckType.setImageResource(R.drawable.trailer);
-        }
+        }*/
 
-        if(loadingPoint.length() > 27){
+        if(loadingPoint.length() > 34){
             char loading[] = loadingPoint.toCharArray();
-            loading[24] = '.';
-            loading[25] = '.';
-            loading[26] = '.';
+            loading[34] = '.';
+            loading[32] = '.';
+            loading[33] = '.';
             loadingPoint = String.valueOf(loading);
         }
 
-        if (destinationPoint.length() >27){
+        if (destinationPoint.length() > 34){
             char destination[] = destinationPoint.toCharArray();
-            destination[24] = '.';
-            destination[25] = '.';
-            destination[26] = '.';
+            destination[34] = '.';
+            destination[32] = '.';
+            destination[33] = '.';
             destinationPoint = String.valueOf(destination);
         }
 
+        Log.i("CHECK", "onBindViewHolder: loading :  " + loadingPoint.length());
+
         viewHolder.tvOrderItemLoadingPoint.setText(loadingPoint);
         viewHolder.tvOrderItemTripDestination.setText(destinationPoint);
-        viewHolder.tvOrderItemTruckType.setText(order.getTruckType());
-        viewHolder.tvOrderItemMaterialType.setText(order.getMaterialType());
-        viewHolder.tvOrderItemLoadingTime.setText(order.getLoadingDate());
-        viewHolder.tvOrderItemRemarks.setText(order.getRemarks());
+        // viewHolder.tvOrderItemTruckType.setText(order.getTruckType());
+        //viewHolder.tvOrderItemMaterialType.setText(order.getMaterialType());
+        viewHolder.tvOrderItemLoadingTime.setText(order.getLoadingTime());
+        viewHolder.tvOrderItemLoadingDate.setText(order.getLoadingDate());
+        // viewHolder.tvOrderItemRemarks.setText(order.getRemarks());
 
-        if(order.getCompleted().equals("Yes")){
+       /* if(order.getCompleted().equals("Yes")){
             viewHolder.btOrderItemStatus.setText("Accepted (Click to see details)");
             viewHolder.btOrderItemStatus.setBackgroundColor(context.getResources().getColor(R.color.green));
-        }
+        }*/
+
+       viewHolder.btOrderId.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               context.startActivity(new Intent(context,OrderDetailsActivity.class));
+           }
+       });
     }
 
     private String generateHash(String s, String s1, String s2, String s3, String s4) {
@@ -98,38 +110,33 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         if (hash < 0){
             hash = hash * -1;
         }
-        return hash + "";*/
+        return hash + "";
     }
 
     @Override
     public int getItemCount() {
-       // return listOfOrders.size();
+        return listOfOrders.size();
 
-        return 3;
+        // return 3;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-/*
-        private TextView tvOrderItemLoadingPoint,tvOrderItemTripDestination,tvOrderItemTruckType,tvOrderItemMaterialType,tvOrderItemLoadingTime,
-                tvOrderItemOrderId,tvOrderItemRemarks;
 
-        private ImageView ivOrderItemTruckType;
+        private TextView tvOrderItemLoadingPoint,tvOrderItemLoadingDate,tvOrderItemLoadingTime,
+                tvOrderItemTripDestination;
+        private Button btOrderId;
 
-        private Button btOrderItemStatus;*/
+        // private Button btOrderItemStatus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-           /* ivOrderItemTruckType = itemView.findViewById(R.id.iv_order_item_truck_type);
-
             tvOrderItemLoadingPoint = itemView.findViewById(R.id.tv_order_item_loading_point);
-            tvOrderItemTripDestination = itemView.findViewById(R.id.tv_order_item_trip_destination);
-            tvOrderItemTruckType = itemView.findViewById(R.id.tv_order_item_truck_type);
-            tvOrderItemMaterialType = itemView.findViewById(R.id.tv_order_item_material_type);
+            tvOrderItemTripDestination = itemView.findViewById(R.id.tv_order_item_destination_point);
+            tvOrderItemLoadingDate = itemView.findViewById(R.id.tv_order_item_loading_date);
             tvOrderItemLoadingTime = itemView.findViewById(R.id.tv_order_item_loading_time);
-            tvOrderItemOrderId = itemView.findViewById(R.id.tv_order_item_order_id);
-            tvOrderItemRemarks = itemView.findViewById(R.id.tv_order_item_remarks);
-            btOrderItemStatus =itemView.findViewById(R.id.bt_order_item_status);*/
+            btOrderId = itemView.findViewById(R.id.bt_order_item_order_id);
+            //  btOrderItemStatus =itemView.findViewById(R.id.bt_order_item_status);
         }
     }
 }

@@ -22,8 +22,7 @@ public class SharedPrefManager {
 
 
 
-    public void LoginUser(String name, String email, String number, String emailverified, String numberverified, String companyname
-            , String address){
+    public void LoginUser(String name, String email, String number,String alternatenumber, String emailverified, String numberverified){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("name", name);
@@ -31,8 +30,9 @@ public class SharedPrefManager {
         editor.putString("number", number);
         editor.putString("emailverified", emailverified);
         editor.putString("numberverified", numberverified);
-        editor.putString("companyname", companyname);
-        editor.putString("address", address);
+        editor.putString("alternatenumber",alternatenumber);
+        //editor.putString("companyname", companyname);
+       // editor.putString("address", address);
 
         editor.apply();
     }
@@ -137,16 +137,12 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString("number", null);
     }
-
-    public String getCompanyName(){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
-        return sharedPreferences.getString("companyname","Not provided");
+    public String getAlternateNumber(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("alternatenumber", "");
     }
 
-    public String getAddress(){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
-        return sharedPreferences.getString("address","Not provided");
-    }
+
 
 
 

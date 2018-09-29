@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -47,7 +48,7 @@ public class AccountFragment extends Fragment {
     private ImageView ivAccountEditNumber, ivAccountEmailNotVerified,
             ivAccountEmailVerified,ivAccountAlternateNumberVerified,ivAccountAlternateNumberNotVerified
             ,ivUploadPanCard;
-    private Button btLogout;
+    private Button btLogout,btSaveChanges;
     private CardView cvLogout;
     private EditText etAccountUserName,etAccountUserEmail,etAccountUserNumber,etAccountUserAlternateNumber;
     private RelativeLayout rlUploadPANCard,rlUploadAddressProof,rlUploadVisitingCard;
@@ -127,14 +128,17 @@ public class AccountFragment extends Fragment {
 
         cvLogout = view.findViewById(R.id.cv_logout);
         btLogout = view.findViewById(R.id.bt_logout);
+        btSaveChanges = view.findViewById(R.id.bt_save_changes);
 
 
 
         ivAccountEditNumber = view.findViewById(R.id.iv_account_edit_user_number);
 
         tvAccountUserName.setText(SharedPrefManager.getInstance(getContext()).getName());
+        etAccountUserName.setText(SharedPrefManager.getInstance(getContext()).getName());
         etAccountUserEmail.setText(SharedPrefManager.getInstance(getContext()).getEmail());
-        etAccountUserNumber.setText("+91" + SharedPrefManager.getInstance(getContext()).getNumber());
+        etAccountUserNumber.setText(SharedPrefManager.getInstance(getContext()).getNumber());
+        etAccountUserAlternateNumber.setText(SharedPrefManager.getInstance(getContext()).getAlternateNumber());
 
 
         if (SharedPrefManager.getInstance(getContext()).isEmailVerified().equals("Yes")){
@@ -202,10 +206,9 @@ public class AccountFragment extends Fragment {
                                                                 SharedPrefManager.getInstance(getContext()).getName(),
                                                                 SharedPrefManager.getInstance(getContext()).getEmail(),
                                                                 SharedPrefManager.getInstance(getContext()).getNumber(),
+                                                                SharedPrefManager.getInstance(getContext()).getAlternateNumber(),
                                                                 "Yes",
-                                                                "Yes",
-                                                                "Not provided",
-                                                                "Not provided"
+                                                                "Yes"
                                                         );
 
                                                         Fragment fragment=new AccountFragment();
@@ -244,6 +247,8 @@ public class AccountFragment extends Fragment {
                 builder.show();
             }
 
+
+
             private String generateHash(String s) {
                 int hash = 21;
                 for (int i = 0; i < s.length(); i++) {
@@ -263,7 +268,7 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        ivAccountEditNumber.setOnClickListener(new View.OnClickListener() {
+       /* ivAccountEditNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -281,15 +286,15 @@ public class AccountFragment extends Fragment {
                 etDialogEditName.setText(SharedPrefManager.getInstance(getActivity()).getName());
                 etDialogEditEmail.setText(SharedPrefManager.getInstance(getContext()).getEmail());
 
-                /*if(!SharedPrefManager.getInstance(getContext()).getCompanyName().equals("Not provided")){
+                if(!SharedPrefManager.getInstance(getContext()).getCompanyName().equals("Not provided")){
                     etDialogCompanyName.setText(SharedPrefManager.getInstance(getContext()).getCompanyName());
-                }*/
+                }
 
                 if(!SharedPrefManager.getInstance(getContext()).getAddress().equals("Not provided")){
                     etDialogAddress.setText(SharedPrefManager.getInstance(getContext()).getAddress());
                 }
 
-/*
+
                 btDialogEditSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -364,12 +369,7 @@ public class AccountFragment extends Fragment {
                         return hash + "";
                     }
 
-                    private boolean isNetworkAvailable() {
-                        ConnectivityManager connectivityManager
-                                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-                        return activeNetworkInfo != null;
-                    }
+
 
 
                     private boolean verifyInputs(String s1,String s2,String s3) {
@@ -400,9 +400,10 @@ public class AccountFragment extends Fragment {
                         return true;
                     }
                 });
-*/
+
             }
         });
+        */
 
         cvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -412,6 +413,81 @@ public class AccountFragment extends Fragment {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
+
+        btSaveChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(verifyInputs()){
+                    if(isNetworkAvailable()){
+                        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setMessage("Saving changes...");
+                        progressDialog.setCanceledOnTouchOutside(false);
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                        DatabaseReference reference = FirebaseDatabase.getInstance()
+                                .getReference("users")
+                                .child(SharedPrefManager.getInstance(getContext()).getNumber());
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                dataSnapshot.child("email").getRef().setValue(etAccountUserEmail.getText().toString());
+                                dataSnapshot.child("name").getRef().setValue(etAccountUserName.getText().toString());
+                                dataSnapshot.child("number").getRef().setValue(SharedPrefManager.getInstance(getContext()).getNumber());
+                                dataSnapshot.child("alternatenumber").getRef().setValue(etAccountUserAlternateNumber.getText().toString());
+
+                                if (!SharedPrefManager.getInstance(getContext()).getEmail().equals(etAccountUserEmail.getText().toString())){
+                                    dataSnapshot.child("emailverified").getRef().setValue("No");
+                                    SharedPrefManager.getInstance(getContext())
+                                            .LoginUser(etAccountUserName.getText().toString(),
+                                                    etAccountUserEmail.getText().toString(),
+                                                    SharedPrefManager.getInstance(getContext()).getNumber(),
+                                                    etAccountUserAlternateNumber.getText().toString(),
+                                                    "No",
+                                                    "Yes"
+                                            );
+                                    ivAccountEmailNotVerified.setVisibility(View.VISIBLE);
+                                    tvAccountEmailNotVerified.setVisibility(View.VISIBLE);
+                                    ivAccountEmailVerified.setVisibility(View.GONE);
+                                    tvAccountEmailVerified.setVisibility(View.GONE);
+                                } else if(SharedPrefManager.getInstance(getContext()).isEmailVerified().equals("Yes")){
+                                    SharedPrefManager.getInstance(getContext())
+                                            .LoginUser(etAccountUserName.getText().toString(),
+                                                    etAccountUserEmail.getText().toString(),
+                                                    SharedPrefManager.getInstance(getContext()).getNumber(),
+                                                    etAccountUserAlternateNumber.getText().toString(),
+                                                    "Yes",
+                                                    "Yes"
+                                            );
+                                } else if(!SharedPrefManager.getInstance(getContext()).isEmailVerified().equals("Yes")){
+                                    SharedPrefManager.getInstance(getContext())
+                                            .LoginUser(etAccountUserName.getText().toString(),
+                                                    etAccountUserEmail.getText().toString(),
+                                                    SharedPrefManager.getInstance(getContext()).getNumber(),
+                                                    etAccountUserAlternateNumber.getText().toString(),
+                                                    "No",
+                                                    "Yes"
+                                            );
+                                }
+                                tvAccountUserName.setText(etAccountUserName.getText().toString().trim());
+                                progressDialog.dismiss();
+
+                               /* Fragment fragment=new AccountFragment();
+                                FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.fl_home_activity,fragment);
+                                fragmentTransaction.commit();*/
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
             }
         });
 
@@ -457,6 +533,44 @@ public class AccountFragment extends Fragment {
         });
 */
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
+
+    private boolean verifyInputs(){
+        String userName = etAccountUserName.getText().toString().trim();
+        String userEmail = etAccountUserEmail.getText().toString().trim();
+      //  String userNumber = etAccountUserNumber.getText().toString().trim();
+        String userAlternateNumber = etAccountUserAlternateNumber.getText().toString().trim();
+
+        if(userName.isEmpty()){
+            etAccountUserName.requestFocus();
+            etAccountUserName.setError("Required");
+            return false;
+        }
+        if(userEmail.isEmpty()){
+            etAccountUserEmail.requestFocus();
+            etAccountUserEmail.setError("Required");
+            return false;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
+            etAccountUserEmail.requestFocus();
+            etAccountUserEmail.setError("Not a valid email");
+            return false;
+        }
+
+        if(userAlternateNumber.length() >1 && userAlternateNumber.length() <10){
+            etAccountUserAlternateNumber.requestFocus();
+            etAccountUserAlternateNumber.setError("Not a valid number");
+            return false;
+        }
+        return true;
     }
 
 

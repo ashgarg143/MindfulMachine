@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white">
@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/holo_blue_dark"
@@ -44,12 +44,14 @@
             </RelativeLayout>
 
             <TextView
-                android:layout_marginBottom="60dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_order"
+                android:layout_marginBottom="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Place an order"
                 android:gravity="center"
-                android:textSize="18sp"
+                android:textSize="19sp"
                 android:textStyle="bold"/>
 
             <EditText
@@ -171,6 +173,46 @@
                 android:drawableLeft="@drawable/ic_access_time_black_24dp"
                 android:drawablePadding="16dp"/>
 
+            <EditText
+                android:id="@+id/et_place_order_payment_type"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Payment Type"
+                android:inputType="textNoSuggestions"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:focusable="false"
+                android:visibility="gone"
+                android:clickable="true"
+                android:longClickable="false"
+                android:drawableLeft="@drawable/ic_payment_black_24dp"
+                android:drawablePadding="16dp"/>
+
+            <EditText
+                android:id="@+id/et_place_order_no_of_trucks"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="No of Trucks"
+                android:inputType="textNoSuggestions"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:focusable="false"
+                android:visibility="gone"
+                android:clickable="true"
+                android:longClickable="false"
+                android:drawableLeft="@drawable/ic_apps_black_24dp"
+                android:drawablePadding="16dp"/>
+
 
             <Spinner
                 android:prompt="@string/app_name"
@@ -228,7 +270,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="50dp"
                 android:textSize="18sp"
-                android:background="@drawable/rounded_edit_text_dark"
+                android:background="@drawable/rounded_edit_text_red"
                 android:text="Request truck"
                 android:inputType="textNoSuggestions"
                 android:textColor="@android:color/white"

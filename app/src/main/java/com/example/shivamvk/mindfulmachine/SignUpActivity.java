@@ -166,11 +166,10 @@ public class SignUpActivity extends AppCompatActivity implements VerificationLis
                                     etSignupName.getText().toString(),
                                     etSignupEmail.getText().toString(),
                                     etSignupNumber.getText().toString(),
+                                    "",
                                     "No",
                                     "Yes",
-                                    "Normal",
-                                    "Not provided",
-                                    "Not provided"
+                                    "Normal"
                             );
                             reference.setValue(user);
                             String notProvided = "Not provided";
@@ -181,10 +180,9 @@ public class SignUpActivity extends AppCompatActivity implements VerificationLis
                                     .LoginUser(etSignupName.getText().toString(),
                                             etSignupEmail.getText().toString(),
                                             etSignupNumber.getText().toString(),
+                                            "",
                                             "No",
-                                            "Yes",
-                                            "Not provided",
-                                            "Not provided"
+                                            "Yes"
                                             );
                             SharedPrefManager.getInstance(getBaseContext()).pancardfront(notProvided);
                             SharedPrefManager.getInstance(getBaseContext()).pancardback(notProvided);

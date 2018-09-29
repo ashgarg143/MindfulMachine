@@ -262,22 +262,23 @@ public class SignInActivity extends AppCompatActivity implements VerificationLis
                 String email = dataSnapshot.child("email").getValue().toString();
                 String number = dataSnapshot.child("number").getValue().toString();
                 String emailverified = dataSnapshot.child("emailverified").getValue().toString();
-                String companyname = dataSnapshot.child("companyname").getValue().toString();
-                String address = dataSnapshot.child("address").getValue().toString();
+                String alternatenumber = dataSnapshot.child("alternatenumber").getValue().toString();
+               // String companyname = dataSnapshot.child("companyname").getValue().toString();
+               // String address = dataSnapshot.child("address").getValue().toString();
                 String pancardfront = dataSnapshot.child("documentimages").child("pancardfront").getValue().toString();
                 String pancardback = dataSnapshot.child("documentimages").child("pancardback").getValue().toString();
                 String aadharcardfront = dataSnapshot.child("documentimages").child("aadharcardfront").getValue().toString();
                 String aadharcardback = dataSnapshot.child("documentimages").child("aadharcardback").getValue().toString();
                 String visitingcardfront = dataSnapshot.child("documentimages").child("visitingcardfront").getValue().toString();
                 String visitingcardback = dataSnapshot.child("documentimages").child("visitingcardback").getValue().toString();
+
                 SharedPrefManager.getInstance(SignInActivity.this).LoginUser(
                         name,
                         email,
                         number,
+                        alternatenumber,
                         emailverified,
-                        "Yes",
-                        companyname,
-                        address
+                        "Yes"
 
                 );
 

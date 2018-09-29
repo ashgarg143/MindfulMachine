@@ -19,6 +19,7 @@
                 android:background="@android:color/holo_blue_dark">
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/iv_account_edit_user_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,6 +156,10 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:focusable="false"
+                    android:clickable="false"
                     android:id="@+id/et_account_user_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,6 +224,8 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:maxLength="10"
+                    android:inputType="number"
                     android:id="@+id/et_account_alternate_user_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -453,10 +460,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_edit_text_dark"
+                android:background="@drawable/rounded_edit_text_red"
                 android:text="Save changes"
                 android:textColor="@android:color/white"
-                android:id="@+id/bt_dialog_edit_save"/>
+                android:id="@+id/bt_save_changes"/>
 
             <Button
                 android:id="@+id/bt_logout"

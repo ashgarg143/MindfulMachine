@@ -1,28 +1,23 @@
 package com.example.shivamvk.mindfulmachine;
 
 public class User {
-    String name,email,number,emailverified,numberverified,usertype,companyname,address;
+    String name,email,number,emailverified,numberverified,usertype,alternatenumber;
 
 
-    public User(String name, String email, String number, String emailverified, String numberverified, String usertype, String companyname, String address) {
+    public User(String name, String email, String number, String alternatenumber, String emailverified, String numberverified, String usertype) {
         this.name = name;
         this.email = email;
         this.number = number;
         this.emailverified = emailverified;
         this.numberverified = numberverified;
         this.usertype = usertype;
-        this.companyname = companyname;
-        this.address = address;
+        this.alternatenumber = alternatenumber;
     }
 
-    public String getCompanyname() {
-        return companyname;
-    }
 
-    public String getAddress() {
-        return address;
+    public String getAlternatenumber() {
+        return alternatenumber;
     }
-
 
     public String getName() {
         return name;

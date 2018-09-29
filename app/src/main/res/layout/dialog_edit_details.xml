@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_edit_text_dark"
+                android:background="@drawable/rounded_edit_text_red"
                 android:text="Save changes"
                 android:textColor="@android:color/white"
                 android:id="@+id/bt_dialog_edit_save"/>

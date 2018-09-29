@@ -31,7 +31,6 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.navigation_orders:
                     getSupportActionBar().hide();
                      fragment = new MyOrdersFragment();
-                    //startActivity(new Intent(HomeActivity.this,MyActivity.class));
                     break;
                 case R.id.navigation_account:
                     getSupportActionBar().hide();

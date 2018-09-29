@@ -751,10 +751,10 @@ public class PlaceOrderFragment extends Fragment {
                             noOfTrucks[1],
                             remarks,
                             "No",
-                            SharedPrefManager.getInstance(getContext()).getEmail()
+                            SharedPrefManager.getInstance(getContext()).getNumber()
                     );
 
-                    Toast.makeText(getContext(), "order: "+ order, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), "order: "+ order, Toast.LENGTH_SHORT).show();
                     reference.setValue(order);
                     progressDialog.dismiss();
                     etTripDestination.setVisibility(View.GONE);

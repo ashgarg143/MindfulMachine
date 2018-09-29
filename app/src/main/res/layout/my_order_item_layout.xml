@@ -11,19 +11,41 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_order_item_distance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:gravity="start"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:paddingLeft="16dp"
-            android:textStyle="italic"
-            android:text="250 KM"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+       <RelativeLayout
+           android:layout_marginBottom="-4dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <Button
+               android:backgroundTint="@android:color/holo_blue_light"
+               android:layout_marginLeft="4dp"
+               android:id="@+id/bt_order_item_order_id"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingRight="8dp"
+               android:paddingLeft="8dp"
+               android:textColor="@android:color/black"
+               android:text="Order id: 122345567"
+               android:textSize="16sp" />
+
+
+
+           <TextView
+               android:paddingBottom="12dp"
+               android:layout_alignParentBottom="true"
+               android:layout_marginRight="12dp"
+               android:layout_alignParentRight="true"
+               android:id="@+id/tv_order_item_distance"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingLeft="16dp"
+               android:textStyle="italic"
+               android:text="250 KM"
+               android:textColor="@android:color/black"
+               android:textSize="16sp" />
+
+
+       </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -46,17 +68,18 @@
 
 
                 <TextView
+                    android:textColor="#52CA2F"
                     android:id="@+id/tv_order_item_loading_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:maxLength="27"
+                    android:maxLength="35"
                     android:textStyle="bold"
                     android:text="Noida, Uttar Pradesh, India"
                     android:textSize="17sp" />
 
                 <TextView
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     android:id="@+id/tv_order_item_loading_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,17 +118,19 @@
 
 
                 <TextView
+                    android:textColor="#E33229"
                     android:textStyle="bold"
-                    android:id="@+id/tv_order_item_destinatopn_point"
+                    android:id="@+id/tv_order_item_destination_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:maxLength="27"
+                    android:maxLength="35"
                     android:text="Noida, Uttar Pradesh, India"
                     android:textSize="17sp" />
 
                 <TextView
-                    android:layout_marginTop="4dp"
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp"
                     android:id="@+id/tv_order_item_destination_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,6 +140,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="4dp"
                     android:id="@+id/tv_order_item_destination_time"
                     android:layout_width="wrap_content"

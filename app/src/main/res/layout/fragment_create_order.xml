@@ -16,7 +16,7 @@
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/grey"
             android:text="MOVE YOUR LOAD IN 3 EASY STEPS"/>
 
         <LinearLayout
@@ -100,9 +100,9 @@
             android:textSize="16sp"
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
+            android:backgroundTint="@color/grey"
             android:id="@+id/bt_create_order_fm_create_order"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
             android:layout_width="wrap_content"

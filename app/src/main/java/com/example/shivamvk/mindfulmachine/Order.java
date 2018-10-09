@@ -2,13 +2,30 @@ package com.example.shivamvk.mindfulmachine;
 
 public class Order {
     private String loadingPoint,tripDestination,truckType,materialType,loadingDate,loadingTime,paymentType,noOfTrucks
-            ,remarks,completed,orderby;
+            ,remarks,completed,orderby,distance;
 
     public Order(){
 
     }
 
+
     public Order(String loadingPoint, String tripDestination, String truckType, String materialType, String loadingDate, String loadingTime
+            , String paymentType, String noOfTrucks, String remarks, String completed, String orderby, String distance) {
+        this.loadingPoint = loadingPoint;
+        this.tripDestination = tripDestination;
+        this.truckType = truckType;
+        this.materialType = materialType;
+        this.loadingDate = loadingDate;
+        this.loadingTime = loadingTime;
+        this.paymentType = paymentType;
+        this.noOfTrucks = noOfTrucks;
+        this.remarks = remarks;
+        this.completed = completed;
+        this.orderby = orderby;
+        this.distance = distance;
+    }
+
+    /*public Order(String loadingPoint, String tripDestination, String truckType, String materialType, String loadingDate, String loadingTime
             , String paymentType, String noOfTrucks, String remarks, String completed, String orderby) {
         this.loadingPoint = loadingPoint;
         this.tripDestination = tripDestination;
@@ -33,7 +50,7 @@ public class Order {
         this.remarks = remarks;
         this.completed = completed;
         this.orderby = orderby;
-    }
+    }*/
 
     public String getLoadingPoint() {
         return loadingPoint;
@@ -77,5 +94,9 @@ public class Order {
 
     public String getOrderby() {
         return orderby;
+    }
+
+    public String getDistance() {
+        return distance;
     }
 }

@@ -17,14 +17,14 @@
            android:layout_height="match_parent">
 
            <Button
-               android:backgroundTint="@android:color/holo_blue_light"
+               android:backgroundTint="@color/grey"
                android:layout_marginLeft="4dp"
                android:id="@+id/bt_order_item_order_id"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:paddingRight="8dp"
                android:paddingLeft="8dp"
-               android:textColor="@android:color/black"
+               android:textColor="@color/black"
                android:text="Order id: 122345567"
                android:textSize="16sp" />
 
@@ -68,7 +68,6 @@
 
 
                 <TextView
-                    android:textColor="#52CA2F"
                     android:id="@+id/tv_order_item_loading_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,7 +117,7 @@
 
 
                 <TextView
-                    android:textColor="#E33229"
+                    android:maxLines="2"
                     android:textStyle="bold"
                     android:id="@+id/tv_order_item_destination_point"
                     android:layout_width="wrap_content"

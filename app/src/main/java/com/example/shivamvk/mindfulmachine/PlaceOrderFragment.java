@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +37,14 @@ import android.widget.Toast;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -48,11 +53,15 @@ import static android.app.Activity.RESULT_OK;
 
 public class PlaceOrderFragment extends Fragment {
 
+    private static final String TAG = PlaceOrderFragment.class.getSimpleName();
     private TextView tvNotificationText;
     private ImageView ivCloseNotification;
     private RelativeLayout rlNoificationHeader;
     private EditText etLoadingPoint,etTripDestination,etTruckType,etMaterialType, etLoadingDate,etLoadingTime,etRemarks;
     private Button btPlaceOrder;
+
+    private double latOrigin=0,longOrigin=0,latDestination=0,longDestination=0;
+    private double distance=0;
 
     private Spinner spPaymentType,spNoOfTrucks;
 
@@ -106,10 +115,11 @@ public class PlaceOrderFragment extends Fragment {
             }
         });
 
+
         etLoadingPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (SharedPrefManager.getInstance(getContext()).isNumberVerified().equals("No")){
+                /*if (SharedPrefManager.getInstance(getContext()).isNumberVerified().equals("No")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage("Please verify your email before placing an order!");
                     builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
@@ -124,11 +134,16 @@ public class PlaceOrderFragment extends Fragment {
                     });
                     builder.show();
                     return;
-                }
+                }*/
                 try {
                     getActivity().setTitle("Create an order");
+                    AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
+                            .setCountry("IN")
+                            .build();
+
                     Intent intent =
                             new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .setFilter(autocompleteFilter)
                                     .build(getActivity());
                     startActivityForResult(intent, LOADING_POINT_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException e) {
@@ -139,12 +154,18 @@ public class PlaceOrderFragment extends Fragment {
             }
         });
 
+
         etTripDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
+                            .setCountry("IN")
+                            .build();
+
                     Intent intent =
                             new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .setFilter(autocompleteFilter)
                                     .build(getActivity());
                     startActivityForResult(intent, TRIP_DESTINATION_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException e) {
@@ -155,9 +176,13 @@ public class PlaceOrderFragment extends Fragment {
             }
         });
 
+
+
         etTruckType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+               // Log.i(TAG, "onClick: distance firebase: "+ distance );
                 final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                 View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_truck_type, null, false);
                 final LinearLayout llTruckTypeOpen,llTruckTypeContainer,llTruckTypeTrailer;
@@ -751,11 +776,22 @@ public class PlaceOrderFragment extends Fragment {
                             noOfTrucks[1],
                             remarks,
                             "No",
-                            SharedPrefManager.getInstance(getContext()).getNumber()
+                            SharedPrefManager.getInstance(getContext()).getNumber(),
+                            distance+" KM"
                     );
 
+
+
                    // Toast.makeText(getContext(), "order: "+ order, Toast.LENGTH_SHORT).show();
+
                     reference.setValue(order);
+
+                    Log.i(TAG, "onClick: distance database 1111: "+ distance );
+
+
+                   // Toast.makeText(getContext(), "Distance in km: " + distance +" KM", Toast.LENGTH_LONG).show();
+
+                    //reference.child("distance").setValue(distance);
                     progressDialog.dismiss();
                     etTripDestination.setVisibility(View.GONE);
                     etTruckType.setVisibility(View.GONE);
@@ -835,6 +871,32 @@ public class PlaceOrderFragment extends Fragment {
         if(requestCode==LOADING_POINT_REQUEST_CODE){
             if(resultCode==RESULT_OK){
                 Place place = PlaceAutocomplete.getPlace(getActivity(),data);
+
+                latOrigin = place.getLatLng().latitude;
+                longOrigin = place.getLatLng().longitude;
+
+                Log.i(TAG, "onActivityResult: latitude : " + latOrigin);
+
+
+                if(latOrigin!=0 && longOrigin!=0 && latDestination !=0 && longDestination!=0){
+                    Location location1 =    new Location("");
+                    location1.setLatitude(latOrigin);
+                    location1.setLongitude(longOrigin);
+
+                    Location location2 = new Location("");
+                    location2.setLatitude(latDestination);
+                    location2.setLongitude(longDestination);
+
+                    float dist = location1.distanceTo(location2);
+                    distance = dist/1000;
+
+                    distance = Math.round(distance);
+
+                    Log.i(TAG, "onViewCreated: distance : "+ distance);
+
+                    Toast.makeText(getContext(), "Distance in km: " + distance +" KM", Toast.LENGTH_LONG).show();
+                }
+
                 etLoadingPoint.setText(place.getAddress());
                 etTripDestination.setVisibility(View.VISIBLE);
             } else if (resultCode==PlaceAutocomplete.RESULT_ERROR){
@@ -848,8 +910,33 @@ public class PlaceOrderFragment extends Fragment {
         if(requestCode==TRIP_DESTINATION_REQUEST_CODE){
             if(resultCode==RESULT_OK){
                 Place place = PlaceAutocomplete.getPlace(getActivity(),data);
+
+                latDestination = place.getLatLng().latitude;
+                longDestination = place.getLatLng().longitude;
+
                 etTripDestination.setText(place.getAddress());
                 etTruckType.setVisibility(View.VISIBLE);
+
+
+                if(latOrigin!=0 && longOrigin!=0 && latDestination !=0 && longDestination!=0){
+                    Location location1 =    new Location("");
+                    location1.setLatitude(latOrigin);
+                    location1.setLongitude(longOrigin);
+
+                    Location location2 = new Location("");
+                    location2.setLatitude(latDestination);
+                    location2.setLongitude(longDestination);
+
+                    float dist = location1.distanceTo(location2);
+                    distance = dist/1000;
+
+                    distance = Math.round(distance);
+
+                    Log.i(TAG, "onViewCreated: distance : "+ distance);
+                   // Toast.makeText(getContext(), "Distance in km: " + distance +" KM", Toast.LENGTH_LONG).show();
+
+                }
+
             } else if (resultCode==PlaceAutocomplete.RESULT_ERROR){
                 Status status= PlaceAutocomplete.getStatus(getContext(),data);
                 Toast.makeText(getContext(), status.getStatusMessage(), Toast.LENGTH_SHORT).show();

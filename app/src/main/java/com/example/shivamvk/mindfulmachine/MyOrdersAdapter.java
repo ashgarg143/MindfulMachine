@@ -33,15 +33,23 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Order order = listOfOrders.get(i);
+        final Order order = listOfOrders.get(i);
 
-        String orderid = "Order id: " + generateHash(
+        /*final String orderid = "Order id: " + generateHash(
                 order.getLoadingPoint(),
                 order.getTripDestination(),
                 order.getTruckType(),
                 order.getMaterialType(),
                 order.getLoadingDate()
-        );
+        );*/
+
+        final String orderid = generateHash(
+                order.getLoadingPoint(),
+                order.getTripDestination(),
+                order.getTruckType(),
+                order.getMaterialType(),
+                order.getLoadingDate(),
+                order.getLoadingTime());
 
         // viewHolder.tvOrderItemOrderId.setText(orderid);
 
@@ -80,6 +88,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
         Log.i("CHECK", "onBindViewHolder: loading :  " + loadingPoint.length());
 
+        viewHolder.tvOrderItemDistance.setText(order.getDistance());
         viewHolder.tvOrderItemLoadingPoint.setText(loadingPoint);
         viewHolder.tvOrderItemTripDestination.setText(destinationPoint);
         // viewHolder.tvOrderItemTruckType.setText(order.getTruckType());
@@ -93,17 +102,30 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
             viewHolder.btOrderItemStatus.setBackgroundColor(context.getResources().getColor(R.color.green));
         }*/
 
-       viewHolder.btOrderId.setOnClickListener(new View.OnClickListener() {
+       viewHolder.btOrderId.setText(orderid);
+
+        viewHolder.btOrderId.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               context.startActivity(new Intent(context,OrderDetailsActivity.class));
+               Intent intent = new Intent(context,OrderDetailsActivity.class);
+               intent.putExtra("loadingpoint", order.getLoadingPoint());
+               intent.putExtra("destinationpoint",order.getTripDestination());
+               intent.putExtra("loadingdate",order.getLoadingDate());
+               intent.putExtra("loadingtime",order.getLoadingTime());
+               intent.putExtra("trucktype",order.getTruckType());
+               intent.putExtra("materialtype",order.getMaterialType());
+               intent.putExtra("paymenttype",order.getPaymentType());
+               intent.putExtra("nooftrucks",order.getNoOfTrucks());
+               intent.putExtra("remarks",order.getRemarks());
+               intent.putExtra("orderid",orderid);
+               context.startActivity(intent);
            }
        });
     }
 
-    private String generateHash(String s, String s1, String s2, String s3, String s4) {
+    private String generateHash(String s, String s1, String s2, String s3, String s4, String s5) {
         int hash = 21;
-        String main = s + s1 + s2 + s3 + s4;
+        String main = s + s1 + s2 + s3 + s4 + s5;
         for (int i = 0; i < main.length(); i++) {
             hash = hash*31 + main.charAt(i);
         }
@@ -123,13 +145,15 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvOrderItemLoadingPoint,tvOrderItemLoadingDate,tvOrderItemLoadingTime,
-                tvOrderItemTripDestination;
+                tvOrderItemTripDestination,tvOrderItemDistance;
         private Button btOrderId;
 
         // private Button btOrderItemStatus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            tvOrderItemDistance = itemView.findViewById(R.id.tv_order_item_distance);
 
             tvOrderItemLoadingPoint = itemView.findViewById(R.id.tv_order_item_loading_point);
             tvOrderItemTripDestination = itemView.findViewById(R.id.tv_order_item_destination_point);

@@ -16,7 +16,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@android:color/holo_blue_dark">
+                android:background="@color/red">
 
                 <ImageView
                     android:visibility="gone"
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Name"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/grey"
                     android:textSize="16sp" />
 
                 <EditText
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/grey"
                     android:textSize="16sp" />
 
                 <EditText
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Number"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/grey"
                     android:textSize="16sp" />
 
                 <EditText
@@ -220,10 +220,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Alternate Number"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/grey"
                     android:textSize="16sp" />
 
                 <EditText
+                    android:textColorHint="@color/grey"
                     android:maxLength="10"
                     android:inputType="number"
                     android:id="@+id/et_account_alternate_user_number"
@@ -259,7 +260,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PAN Card"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/grey"
                     android:textSize="16sp"/>
 
                 <TextView
@@ -327,7 +328,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Proof of Address"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/grey"
                     android:textSize="16sp"/>
 
                 <TextView
@@ -398,7 +399,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Visiting Card"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/grey"
                     android:textSize="16sp"/>
 
                 <TextView
@@ -470,13 +471,13 @@
                 android:layout_marginBottom="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:backgroundTint="@android:color/holo_blue_dark"
+                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_edit_text_blue"
                 android:text="Logout"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/black"/>
 
             <android.support.v7.widget.CardView
                 android:visibility="gone"
